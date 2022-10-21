@@ -1,6 +1,7 @@
 //Modules
 const express = require('express')
 const path = require('path')
+const cors = require('cors')
 
 
 // Initialize the app
@@ -12,9 +13,12 @@ app.use(express.json());
 //Setting up the static directory
 app.use(express.static(path.join(__dirname, 'public')))
 
+//Cors middlewear
+app.use(cors())
 
 
-
+//init routes
+require('./routes/api')(app)
 
 
 
