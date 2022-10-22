@@ -3,7 +3,7 @@ module.exports = async function (req, res, next) {
         //Check if token exist
         const token = await req.cookies.token;
         //Check if token secret is correct
-        if(token) return res.redirect('/feed')
+        if(token) return res.redirect('/')
         //If all is ok route can continue
         next()
     } catch (error) {

@@ -7,7 +7,7 @@ const userPass = require('../middleware/userPass')
 const alreadyLogin = require('../middleware/alreadyLogin')
 
 //routes
-router.get('/feed', userPass,  API.Feed)
+router.get('/', userPass,  API.Feed)
 router.get('/login', alreadyLogin , API.loginPage)
 router.get('/register', alreadyLogin, API.registerPage)
 

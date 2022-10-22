@@ -59,7 +59,7 @@ module.exports = class API {
 
             //Automatic login user after register
             const token = jwt.sign({id: newUser.id ,name: newUser.firstName}, secret )
-            res.cookie('token',token, { maxAge: 900000, httpOnly: true }).redirect('/feed')
+            res.cookie('token',token, { maxAge: 900000, httpOnly: true }).redirect('/')
 
         } catch(err) {
             res.send(err)
@@ -97,7 +97,7 @@ module.exports = class API {
 
         //Evrything is ok create token
         const token = jwt.sign({id: User.id, name: User.firstName}, secret )
-        res.cookie('token',token, { maxAge: 900000, httpOnly: true }).redirect('/feed')
+        res.cookie('token',token, { maxAge: 900000, httpOnly: true }).redirect('/')
     }
 
     //Login
