@@ -2,15 +2,20 @@
 const express = require('express')
 const path = require('path')
 const cors = require('cors')
-var cookieParser = require('cookie-parser')
-
-
+const cookieParser = require('cookie-parser')
+const bodyParser = require('body-parser')
 
 // Initialize the app
 const app = express();
 
-//Parsing JSON bodies with express JSON
-app.use(express.json()); 
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
+
+// set the view engine to ejs
+app.set('view engine', 'ejs');
 
 //Setting up the static directory
 app.use(express.static(path.join(__dirname, 'public')))
