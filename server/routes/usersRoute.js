@@ -4,5 +4,6 @@ const API = require('../controllers/usersController')
 
 //routes
 router.post('/register', API.register)
+router.post('/login', API.login)
 
 module.exports = router;

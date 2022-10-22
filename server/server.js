@@ -2,6 +2,8 @@
 const express = require('express')
 const path = require('path')
 const cors = require('cors')
+var cookieParser = require('cookie-parser')
+
 
 
 // Initialize the app
@@ -16,6 +18,8 @@ app.use(express.static(path.join(__dirname, 'public')))
 //Cors middlewear
 app.use(cors())
 
+//Middlewear for working with cookies
+app.use(cookieParser())
 
 //init routes
 require('./routes/api')(app)
