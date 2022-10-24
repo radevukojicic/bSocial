@@ -4,23 +4,191 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!--Boostrap css-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!--css-->
     <link rel="stylesheet" href="/css/style.css">
-    <title>Login</title>
+    <title>Feed</title>
 </head>
 <body>
     <%- include('layout/header')  %> 
-     <h1>Zdravo <%= user.name  %> </h1>
-     <h1>Tvoj redni broj je <%= user.id  %> </h1>
-      
+
+    <div id="feed" class="container-fluid gedf-wrapper">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="h5">Profile info</div>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <div class="h6 text-muted">Name</div>
+                            <div class="h5"><%= user.name %></div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="h6 text-muted">Followers</div>
+                            <div class="h5">5.2342</div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="h6 text-muted">Following</div>
+                            <div class="h5">6758</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6 gedf-main">
+
+                <!--- \\\\\\\Post-->
+                <div class="card gedf-card">
+                    <div class="card-header">
+                       <h5>Create post</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
+                                <div class="form-group">
+                                <div id="errMsg" class="alert alert-danger" role="alert"></div>
+                                <div id="succMsg" class="alert alert-success" role="alert"> </div>
+                                    <label class="sr-only" for="message">post</label>
+                                    <input hidden name="id" value="<%= user.id %>" type="text">
+                                    <input hidden name="email" value="<%= user.email %>" type="text">
+                                    <input hidden name="username" value="<%= user.username %>" type="text">
+                                  
+                                    <textarea class="form-control" name="content" id="content" rows="3" placeholder="What are you thinking?" ></textarea>
+                                </div>
+
+                            </div>
+                           
+                        </div>
+                        <div class="btn-toolbar justify-content-between">
+                            <div class="btn-group">
+                                <button onclick="createPost()" type="button" id="createBtn" class="createBtn btn btn-primary">Upload</button>
+                            </div>
+                    
+                        </div>
+                    </div>
+                </div>
+                <!-- Post /////-->
+                <% posts.forEach(post => { %>
+                <div class="card gedf-card mt-5">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="mr-2">
+                                </div>
+                                <div class=" mt-1">
+                                    <div class="h5 m-0">@<%= post.username  %> </div>
+                                </div>
+                            </div>
+                            <div>
+                            
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card-body">
+                        <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i><%= post.create  %></div>
+                        <!-- <a class="card-link" href="#">
+                            <h5 class="card-title">Lorem ipsum dolor sit amet, consectetur adip.</h5>
+                        </a> -->
+
+                        <p class="card-text">
+                            <%= post.content  %>
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="card-link"><i class="fa fa-comment"></i> Comments (23)</a>
+                    </div>
+                </div>
+                <% }) %> 
+               
+
+
+
+
+           
+
+
+
+            </div>
+            <div class="col-md-3">
+                <div class="card gedf-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                            card's content.</p>
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
+                <div class="card gedf-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                                card's content.</p>
+                            <a href="#" class="card-link">Card link</a>
+                            <a href="#" class="card-link">Another link</a>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
       
 </body>
+<script>
 
+ function getPosts() {
+    fetch('/', options)
+};
+
+window.onload = getPosts()
+
+async function createPost() {
+    const errMsg = document.getElementById('errMsg')
+    const succMsg = document.getElementById('succMsg')
+    const data = await {
+     id: parseInt(`<%= user.id %>`),
+     email: `<%= user.email %>`,
+     username: `<%= user.username %>`,
+     content: document.getElementById('content').value,
+     };
+
+    const options = await {
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+    };
+    fetch('/feed/createPost', options)
+    .then(async response => {
+      let message = await response.json();
+      if(response.status == 400 ){
+        succMsg.style.display = 'none'
+        errMsg.innerText = message.message
+        errMsg.style.display = 'block'
+
+      }
+      if(response.status == 200 ){
+        errMsg.style.display = 'none'
+        succMsg.innerText = message.message
+        succMsg.style.display = 'block'
+
+        
+      }
+      
+    })
+}
+
+</script>
 <!--Boostrap javascript-->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
 </body>
 </html>

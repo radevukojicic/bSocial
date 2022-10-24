@@ -2,7 +2,7 @@ module.exports = async function (req, res, next) {
     try {
         //Check if token exist
         const token = await req.cookies.token;
-        //Check if token secret is correct
+        //If token exist dont allow access to login/register page
         if(token) return res.redirect('/')
         //If all is ok route can continue
         next()
