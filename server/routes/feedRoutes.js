@@ -4,6 +4,7 @@ const API = require('../controllers/feedController')
 
 //routes
 router.get('/getPosts', API.getPosts)
+router.get('/nonFollowing', API.nonFollowing)
 router.post('/createPost', API.createPost)
 
 
