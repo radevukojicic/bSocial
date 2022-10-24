@@ -17,8 +17,6 @@ module.exports = class API {
            followingId: followingId,
         })
      
-        const usersAll = await user.findAll({})
-        const followAll = await follow.findAll({})
         res.status(200).send({message:"Successfully followed user"})
   
       }

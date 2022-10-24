@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
 
-    const Post = sequelize.define("post", {
+    const Comments = sequelize.define("comments", {
         content: {
           type: DataTypes.STRING,
           allowNull: false,
@@ -9,16 +9,20 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-        username: {
-            type: DataTypes.STRING,
+        userId: {
+            type: DataTypes.INTEGER,
             allowNull: false,
         },
         email: {
             type: DataTypes.STRING,
             allowNull: false,
         },
+        username: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
       });
 
-    return Post
+    return Comments
 
 }
