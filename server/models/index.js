@@ -34,6 +34,7 @@ db.Sequelize = Sequelize
 db.sequelize = sequelize
 
 db.users = require('./usersModel')(sequelize, DataTypes)
+db.post = require('./postModel')(sequelize, DataTypes)
 
 db.sequelize.sync({ force: false })
 .then(() => {

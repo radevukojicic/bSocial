@@ -17,10 +17,10 @@ module.exports = class API {
     static async register(req, res) {
 
         //grabbing form data
-        const {firstName,lastName,email, password , passwordConfirm} = req.body
+        const {firstName,lastName,email, username, password , passwordConfirm} = req.body
 
         //Check if inputs are empty
-        if(!firstName || !lastName || !email || !password || !passwordConfirm){
+        if(!firstName || !lastName || !email || !username || !password || !passwordConfirm){
             // return res.status(400).send('All fields are required!')
             return res.render('register',{error:"All fields are required!"})
 
@@ -52,13 +52,14 @@ module.exports = class API {
             firstName,
             lastName,
             email,
+            username,
             password:hashPassword
         }
         try {
             const newUser = await user.create(userInfo)
 
             //Automatic login user after register
-            const token = jwt.sign({id: newUser.id ,name: newUser.firstName}, secret )
+            const token = jwt.sign({id: newUser.id ,name: newUser.firstName , email: newUser.email,username: newUser.username}, secret )
             res.cookie('token',token, { maxAge: 900000, httpOnly: true }).redirect('/')
 
         } catch(err) {
@@ -96,7 +97,7 @@ module.exports = class API {
         if(!validPass) return res.render('login',{error:"Wrong email or password!"})
 
         //Evrything is ok create token
-        const token = jwt.sign({id: User.id, name: User.firstName}, secret )
+        const token = jwt.sign({id: User.id, name: User.firstName, email: User.email,username: User.username }, secret )
         res.cookie('token',token, { maxAge: 900000, httpOnly: true }).redirect('/')
     }
 
