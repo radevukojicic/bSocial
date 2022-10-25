@@ -9,7 +9,9 @@ module.exports = class API {
     static async follow(req, res) {
    
         const userId = req.user.id;
-        const followingId = req.body.id;
+        const followingId = req.body.followingId;
+
+        console.log(followingId)
 
         //Create following 
         await follow.create({
