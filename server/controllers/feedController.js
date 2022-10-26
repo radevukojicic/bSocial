@@ -9,11 +9,11 @@ const user = db.users
 
 module.exports = class API {
 
+  
     //Get posts
     static async getPosts(req, res) {
          
-        // const id = req.user.id
-         const id = 1
+        const id = req.user.id
         //Get followings for user LogedIn
         const following = await follow.findAll({
             where: {
@@ -41,21 +41,35 @@ module.exports = class API {
 
 
     }
+
+    //Get single post
+    static async getPost(req, res) {
+         
+      const id = req.params.postId
+      //Find posts for users following and order by time
+      const postSingle = await post.findOne({
+           where: { id: id },
+      })
+      res.status(200).send(postSingle)
+
+
+  }
+
+
     //Create post
     static async createPost(req, res) {
       //grabbing  data
-      const {email,username,id,content} = req.body
-      console.log(req.body)
+      const content = req.body.content
       //Check if inputs are empty
-      if( !email || !username || !id || !content){
+      if(!content){
           return res.status(400).send({message:'Field is required!!'})
       }
 
       //if all is ok create post
       const newPost = await post.create({
-        userId: id,
-        username: username,
-        email: email,
+        userId: req.user.id,
+        username: req.user.username,
+        email: req.user.email,
         content: content,
       })
       console.log(newPost)
@@ -67,8 +81,7 @@ module.exports = class API {
     static async nonFollowing(req, res) {
 
         //Get user id
-        // const id = req.user.id;
-         const id = 1;
+        const id = req.user.id;
 
         //Get followings for user LogedIn
         const following = await follow.findAll({

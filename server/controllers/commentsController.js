@@ -8,10 +8,11 @@ module.exports = class API {
     //Make a comment
     static async postComment(req, res) {
 
-        // const userId = req.user.id;
-        const userId = 1
+        const userId = req.user.id;
+        const username = req.user.username;
+        const email = req.user.email;
    
-        const { username,email, password , postId , content} = req.body
+        const { postId , content} = req.body
         
         await comments.create({
             content: content,
@@ -27,7 +28,7 @@ module.exports = class API {
 
        static async getCommentsForId(req, res) {
         const postId = req.body.postId;
-        const Comments = comments.findAll({
+        const Comments = await  comments.findAll({
           where: {
             postId: postId,
           },
