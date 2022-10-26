@@ -1,4 +1,4 @@
-# vutt2
+# bSocial client
 
 ## Project setup
 ```
