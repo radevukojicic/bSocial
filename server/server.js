@@ -4,10 +4,17 @@ const path = require('path')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
-const session = require("express-session");
 
 // Initialize the app
 const app = express();
+
+// socket
+const server = require("http").createServer(app);
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "*",
+  },
+});
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -31,12 +38,17 @@ app.use(cors());
 
 
 //init routes
-require('./routes/api')(app)
+require('./routes/api')(app,io)
 
 
+// socket connection
+io.on("connection", (socket) => {
+    console.log("SOCKET connected");
+});
 
+  
 //Connecting to port and starting server
 const PORT = process.env.PORT || 8000;
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`)
 })

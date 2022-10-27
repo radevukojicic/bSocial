@@ -137,8 +137,10 @@
 import NavBar from '@/components/NavBar'
 import apiClient from '../services/service'
 
+
 export default {
     data: () => ({
+     socket:{},
      posts:[],
      nonFollow:[],
      userInfo:{},
@@ -151,9 +153,9 @@ export default {
     components: {
       NavBar,
     },
+
     mounted() {
       this.userInfo = JSON.parse(atob(localStorage.getItem('token').split('.')[1]));
-      console.log(this.userInfo)
       apiClient.getPosts()
       .then(response => {
         this.posts = response.data
@@ -191,7 +193,6 @@ export default {
        }
         await apiClient.createPost(data)
         .then(response => {
-            console.log(response.data)
             this.errMsg = false
             this.content = ''
             this.succMsg = response.data.message

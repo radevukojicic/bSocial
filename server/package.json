@@ -22,6 +22,8 @@
     "express-session": "^1.17.3",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.3.3",
-    "sequelize": "^6.25.3"
+    "sequelize": "^6.25.3",
+    "socket-io": "^1.0.0",
+    "socket.io": "^4.5.3"
   }
 }

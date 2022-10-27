@@ -12,7 +12,7 @@ const AuthRoute = require('./authRoute')
 
 
 
-function initRoutes(app) {
+function initRoutes(app,io) {
 
     //Auth pages
     app.use('/auth', AuthRoute)
@@ -31,7 +31,7 @@ function initRoutes(app) {
     app.use('/following',userPass,   followingRoute)
 
     //Comments route
-    app.use('/comments',userPass,   commentsRoute)
+    app.use('/comments',userPass, commentsRoute(io))
 
     
 }
