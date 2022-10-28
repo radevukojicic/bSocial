@@ -77,8 +77,8 @@
 import axios from "axios"
 export default {
     data: () => ({
-        email:'rade@pilabs.me',
-        password:'123456',
+        email:'',
+        password:'',
         errMsg:null
     }),
     methods: {
