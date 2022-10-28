@@ -4,7 +4,8 @@ const API = require('../controllers/commentsController')
 const db = require('../models')
 //Model
 const comments = db.comments
-// const user = db.users
+const post = db.post
+
 function SocketRouter(io) {
 const router = express.Router();
 //routes
@@ -24,8 +25,14 @@ router.post('/postComment',async (req, res) => {
         username: username,
         email: email,
       })
-    
-    await io.emit("comments",{comment:`${username} je  komentarisao vasu obajvu "${content}"`,id:1});
+    const postCommented = await post.findOne({
+      where: {
+        id: postId ,
+      },
+    })
+
+    //sending real time notification evry time user comment
+    await io.emit("comments",{comment:`${username} je  komentarisao vasu obajvu "${content}"`,id:postCommented.userId, userCommentId:userId});
     res.status(200).send({message:"Successfully posted comment"})
     })
 
