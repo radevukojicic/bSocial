@@ -11,30 +11,7 @@
                         </li>
                       
                 </div>
-                <div class="mt-5 card">
-                    <v-app-bar color="primary" class="mb-9" dark>Users you don't follow</v-app-bar>
-                    <ul v-for="item in nonFollow" :key="item.name">
-
-                        <v-list-item  class="pl-0 grow">
-
-        <v-list-item-avatar color="grey darken-3">
-          <v-img
-            class="elevation-6"
-            alt=""
-            src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
-          ></v-img>
-        </v-list-item-avatar>
-
-        <v-list-item-content>
-          <v-list-item-title>{{item.username}}</v-list-item-title>
-        </v-list-item-content>
-
-        <v-btn  dark @click="follow(item.id)">Follow</v-btn>
-      </v-list-item>
-                      <v-divider></v-divider>
-
-                      </ul>
-                </div>
+               
             </div>
             <div class="col-md-6 gedf-main">
 
@@ -106,26 +83,30 @@
 
             </div>
             <div class="col-md-3">
-                <div class="card gedf-card">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                            card's content.</p>
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
-                    </div>
+                <div class="mt-5 card">
+                    <v-app-bar color="primary" class="mb-9" dark>Users you don't follow</v-app-bar>
+                    <ul v-for="item in nonFollow" :key="item.name">
+
+                        <v-list-item  class="pl-0 grow">
+
+        <v-list-item-avatar color="grey darken-3">
+          <v-img
+            class="elevation-6"
+            alt=""
+            src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+          ></v-img>
+        </v-list-item-avatar>
+
+        <v-list-item-content>
+          <v-list-item-title>{{item.username}}</v-list-item-title>
+        </v-list-item-content>
+
+        <v-btn  dark @click="follow(item.id)">Follow</v-btn>
+      </v-list-item>
+                      <v-divider></v-divider>
+
+                      </ul>
                 </div>
-                <div class="card gedf-card">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                                card's content.</p>
-                            <a href="#" class="card-link">Card link</a>
-                            <a href="#" class="card-link">Another link</a>
-                        </div>
-                    </div>
             </div>
         </div>
     </div>
