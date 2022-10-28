@@ -46,7 +46,27 @@ const router = new VueRouter({
 export default router
 
 
-// router.beforeEach( (to, from, next) => {
+router.beforeEach((to, from, next) => {
+  if (localStorage.getItem('token')) {
+    var expired = JSON.parse(atob(localStorage.getItem('token').split('.')[1]));
+    var time = (Date.now() < expired.exp * 1000)
+    console.log(time)
+  }
+    //If user is already login protect login and register
+    if(time && to.name === 'Login'){
+      next({name:"Home"})
+    }
+    if(time && to.name === 'Register'){
+      next({name:"Home"})
+    }
 
+    // If logged in, or going to the Login page.
 
-// });
+    if (time || to.name === 'Login' || to.name === 'Register') {
+      // Continue to page.
+      next()
+    } else {
+      // Not logged in, redirect to login.
+      next({name: 'Login'})
+    }
+});
