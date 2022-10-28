@@ -12,7 +12,7 @@
         </v-card-title>
 
         <v-card-text>
-          
+          {{dialogText}}
         </v-card-text>
 
         <v-card-actions>
@@ -39,17 +39,21 @@
 import io from "socket.io-client"; 
 export default {
   data: () => ({
-        dialog:false
+        dialog:false,
+        dialogText:''
     }),
   name: 'App',
   created(){
-      this.userInfo = JSON.parse(atob(localStorage.getItem('token').split('.')[1]));
+      if(localStorage.getItem('token')){
+      const userInfo = JSON.parse(atob(localStorage.getItem('token').split('.')[1]));
       const socket = io("http://localhost:8000");
-      console.log(socket.id)
       socket.on("comments", (data) => {
-        console.log(data.comment)
-        console.log(data.id)
+        if(userInfo.id == data.id && userInfo.id !== data.userCommentId) {
+        this.dialog = true
+        this.dialogText = data.comment
+        }
       });
+      }
     },
 };
 </script>

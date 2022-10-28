@@ -28,9 +28,6 @@ app.set('view engine', 'ejs');
 //Setting up the static directory
 app.use(express.static(path.join(__dirname, 'public')))
 
-//Middlewear for working with cookies
-app.use(cookieParser())
-
 //Cors middlewear
 app.use(cors());
 
